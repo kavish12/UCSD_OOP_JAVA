@@ -12,7 +12,9 @@ import processing.core.PApplet;
 //Unfolding libraries
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.marker.Marker;
+import de.fhpotsdam.unfolding.data.Feature;
 import de.fhpotsdam.unfolding.data.PointFeature;
+import de.fhpotsdam.unfolding.geo.Location;
 import de.fhpotsdam.unfolding.marker.SimplePointMarker;
 import de.fhpotsdam.unfolding.providers.Google;
 import de.fhpotsdam.unfolding.providers.MBTilesMapProvider;
@@ -64,7 +66,31 @@ public class EarthquakeCityMap extends PApplet {
 		}
 		
 	    map.zoomToLevel(2);
-	    MapUtils.createDefaultEventDispatcher(this, map);	
+	    MapUtils.createDefaultEventDispatcher(this, map);
+	    
+	    /*Start of single marker creation 'valMk', displayed on unfolding map object 'map'*/
+	    //Chile location for earthquake ---> Single Marker creation
+	    //using Location class to create object for new location suing coordinates
+	    //Location class from Unfolding Library
+	    Location valLoc = new Location(-38.14f, -73.03f);
+	    
+	    //create a marker to show the above location of Chile
+	    Marker val = new SimplePointMarker(valLoc);
+	
+	    //Feature class
+	    //creating a feature object to store properties of CHile earthquake
+	    Feature valEq = new PointFeature(valLoc);
+	    
+	    //Feature object stores properties as key and value
+	    valEq.addProperty("Title", "Valdivia, Chile");
+	    
+	    //Create a marker object that uses the above properties with the location
+	    Marker valMk = new SimplePointMarker(valLoc, valEq.getProperties());
+	    
+	    //now add this featured marker object to unfolding map object
+	    map.addMarker(valMk);
+	    
+	    /*End of single marker creation*/
 			
 	    // The List you will populate with new SimplePointMarkers
 	    List<Marker> markers = new ArrayList<Marker>();
