@@ -101,7 +101,7 @@ public class EarthquakeCityMap extends PApplet {
 	    //create a LIST of type PointFeature
 	    //group of PointFeature objects
 	    //List of PointFeature objects of datatype ArrayList
-	    List<PointFeature> bigEqs = new ArrayList<PointFeature>();
+	    //List<PointFeature> bigEqs = new ArrayList<PointFeature>();
 	    //bigEqs.add(valEq);
 	    //bigEqs.add(alaskaEq);
 	    
