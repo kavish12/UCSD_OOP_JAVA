@@ -90,7 +90,21 @@ public class EarthquakeCityMap extends PApplet {
 	    //now add this featured marker object to unfolding map object
 	    map.addMarker(valMk);
 	    
+	    //1. Create a location
+	    //2. Create its Feature object, add properties
+	    //3. create marker object for the location and its properties
+	    //4. add the marker object to main map object
+	    
 	    /*End of single marker creation*/
+	    
+	    //top 5 earthquakes
+	    //create a LIST of type PointFeature
+	    //group of PointFeature objects
+	    //List of PointFeature objects of datatype ArrayList
+	    List<PointFeature> bigEqs = new ArrayList<PointFeature>();
+	    //bigEqs.add(valEq);
+	    //bigEqs.add(alaskaEq);
+	    
 			
 	    // The List you will populate with new SimplePointMarkers
 	    List<Marker> markers = new ArrayList<Marker>();
