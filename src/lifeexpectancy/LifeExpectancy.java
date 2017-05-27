@@ -1,9 +1,12 @@
 package lifeexpectancy;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.fhpotsdam.unfolding.UnfoldingMap;
+import de.fhpotsdam.unfolding.data.Feature;
+import de.fhpotsdam.unfolding.marker.Marker;
 import de.fhpotsdam.unfolding.providers.Google;
 import de.fhpotsdam.unfolding.utils.MapUtils;
 import processing.core.PApplet;
@@ -11,6 +14,12 @@ import processing.core.PApplet;
 public class LifeExpectancy extends PApplet {
 	
 	UnfoldingMap map;
+	
+	//List of features of countries which will be added from json file
+	List<Feature> countries;
+	
+	//and list of markers from the above countries
+	List<Marker> countryMarkers;
 	
 	public void setup(){
 		size(800, 600, OPENGL);
