@@ -12,9 +12,7 @@ import processing.core.PApplet;
 //Unfolding libraries
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.marker.Marker;
-import de.fhpotsdam.unfolding.data.Feature;
 import de.fhpotsdam.unfolding.data.PointFeature;
-import de.fhpotsdam.unfolding.geo.Location;
 import de.fhpotsdam.unfolding.marker.SimplePointMarker;
 import de.fhpotsdam.unfolding.providers.Google;
 import de.fhpotsdam.unfolding.providers.MBTilesMapProvider;
@@ -66,45 +64,7 @@ public class EarthquakeCityMap extends PApplet {
 		}
 		
 	    map.zoomToLevel(2);
-	    MapUtils.createDefaultEventDispatcher(this, map);
-	    
-	    /*Start of single marker creation 'valMk', displayed on unfolding map object 'map'*/
-	    //Chile location for earthquake ---> Single Marker creation
-	    //using Location class to create object for new location suing coordinates
-	    //Location class from Unfolding Library
-	    Location valLoc = new Location(-38.14f, -73.03f);
-	    
-	    //create a marker to show the above location of Chile
-	    Marker val = new SimplePointMarker(valLoc);
-	
-	    //Feature class
-	    //creating a feature object to store properties of CHile earthquake
-	    Feature valEq = new PointFeature(valLoc);
-	    
-	    //Feature object stores properties as key and value
-	    valEq.addProperty("Title", "Valdivia, Chile");
-	    
-	    //Create a marker object that uses the above properties with the location
-	    Marker valMk = new SimplePointMarker(valLoc, valEq.getProperties());
-	    
-	    //now add this featured marker object to unfolding map object
-	    map.addMarker(valMk);
-	    
-	    //1. Create a location
-	    //2. Create its Feature object, add properties
-	    //3. create marker object for the location and its properties
-	    //4. add the marker object to main map object
-	    
-	    /*End of single marker creation*/
-	    
-	    //top 5 earthquakes
-	    //create a LIST of type PointFeature
-	    //group of PointFeature objects
-	    //List of PointFeature objects of datatype ArrayList
-	    //List<PointFeature> bigEqs = new ArrayList<PointFeature>();
-	    //bigEqs.add(valEq);
-	    //bigEqs.add(alaskaEq);
-	    
+	    MapUtils.createDefaultEventDispatcher(this, map);	
 			
 	    // The List you will populate with new SimplePointMarkers
 	    List<Marker> markers = new ArrayList<Marker>();
@@ -126,17 +86,50 @@ public class EarthquakeCityMap extends PApplet {
 	    // Here is an example of how to use Processing's color method to generate 
 	    // an int that represents the color yellow.  
 	    int yellow = color(255, 255, 0);
+	    int blue = color(0, 0, 255);
+	    int red = color(255, 0, 0);
 	    
 	    //TODO: Add code here as appropriate
+	    
+	    //create a simplepointmarker object for every earthquake feature location
+	    //and add it to the markers list
+	    for(PointFeature eq: earthquakes){
+	    	//markers.add(new SimplePointMarker(eq.getLocation()));
+	    	markers.add(createMarker(eq));	    	
+	    }
+	    
+	  //add the markers list to map
+	    map.addMarkers(markers);
+	    
+	    
+	    
+	    //change the radius of every marker
+	    //setRadius is a simplepointmarker method
+	    //markers list is of type List
+	    //therefore typecasting every markers to SimplePointMarker 
+	    for(Marker m: markers){
+	    	((SimplePointMarker)m).setRadius(10f);	
+	    	
+	    	if((float) m.getProperty("magnitude") < 4.0){
+	    		m.setColor(blue);
+	    		//m.set
+	    	}else if ((float) m.getProperty("magnitude") >= 4.0 && (float) m.getProperty("magnitude") <= 4.9){
+	    		m.setColor(yellow);
+	    	}else{
+	    		m.setColor(red);
+	    	}
+	    }
+	  //add the markers list to map
+	    map.addMarkers(markers);
 	}
-		
+			
 	// A suggested helper method that takes in an earthquake feature and 
 	// returns a SimplePointMarker for that earthquake
 	// TODO: Implement this method and call it from setUp, if it helps
 	private SimplePointMarker createMarker(PointFeature feature)
 	{
 		// finish implementing and use this method, if it helps.
-		return new SimplePointMarker(feature.getLocation());
+		return new SimplePointMarker(feature.getLocation(), feature.getProperties());
 	}
 	
 	public void draw() {
@@ -151,6 +144,8 @@ public class EarthquakeCityMap extends PApplet {
 	private void addKey() 
 	{	
 		// Remember you can use Processing's graphics methods here
+		//rectangle
+		rect(50, 50, 130, 250);
 	
 	}
 }

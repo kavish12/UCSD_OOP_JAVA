@@ -36,7 +36,7 @@ public class LifeExpectancy extends PApplet {
 		
 		//helper method to create features and marker for the list of countries we have
 		//created above
-		countries = GeoJSONReader.loadData(this, "data/countries.geo.json");
+		countries = GeoJSONReader.loadData(this, "countries.geo.json");
 		countryMarkers = MapUtils.createSimpleMarkers(countries);
 		
 		//now the markers are created, or loaded with each feature location
@@ -70,7 +70,7 @@ public class LifeExpectancy extends PApplet {
 				int colorlevel = (int) map(lifeExp, 40, 90, 10, 255);
 				marker.setColor(color(255-colorlevel, 100, colorlevel));
 			}else{
-				marker.setColor(color(155, 155, 155));
+				marker.setColor(color(150, 150, 150));
 			}
 		}
 	}
