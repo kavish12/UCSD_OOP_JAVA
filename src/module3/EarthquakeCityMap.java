@@ -47,7 +47,7 @@ public class EarthquakeCityMap extends PApplet {
 	private UnfoldingMap map;
 	
 	//feed with magnitude 2.5+ Earthquakes
-	private String earthquakesURL = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.atom";
+	private String earthquakesURL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
 
 	
 	public void setup() {
@@ -60,7 +60,7 @@ public class EarthquakeCityMap extends PApplet {
 		else {
 			map = new UnfoldingMap(this, 200, 50, 700, 500, new Google.GoogleMapProvider());
 			// IF YOU WANT TO TEST WITH A LOCAL FILE, uncomment the next line
-			earthquakesURL = "2.5_week.atom";
+			//earthquakesURL = "2.5_week.atom";
 		}
 		
 	    map.zoomToLevel(2);
@@ -145,7 +145,25 @@ public class EarthquakeCityMap extends PApplet {
 	{	
 		// Remember you can use Processing's graphics methods here
 		//rectangle
+		fill(255);
 		rect(50, 50, 130, 250);
+		//text
+		fill(0, 0, 0);
+		
+		text("Earthquake Key", 70, 70);
+		
+		fill(255, 0, 0);
+		ellipse(70, 120, 15, 15);
+		fill(0, 0, 0);
+		text("5.0+ Magnitude", 80, 120);
+		fill(255, 255, 0);
+		ellipse(70, 140, 10, 10);
+		fill(0, 0, 0);
+		text("4.0+ Magnitude", 80, 140);
+		fill(0, 0, 255);
+		ellipse(70, 160, 5, 5);
+		fill(0, 0, 0);
+		text("Below 4.0", 80, 160);
 	
 	}
 }
