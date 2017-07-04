@@ -16,6 +16,7 @@ public class OceanQuakeMarker extends EarthquakeMarker {
 		
 		// setting field in earthquake marker
 		isOnLand = false;
+		
 	}
 	
 
